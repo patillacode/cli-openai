@@ -15,7 +15,7 @@ def start_chat(model, verbose=False):
     """
     display_output("Starting chat...")
 
-    system = {"role": "system", "content": "DIRECTIVE_FOR_gpt-3.5-turbo"}
+    system = {"role": "system", "content": f"DIRECTIVE_FOR_{model}"}
     message = {"role": "user", "content": ""}
     conversation = [system]
     tokens = 0
