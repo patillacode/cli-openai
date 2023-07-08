@@ -18,7 +18,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @click.option("-v", "--verbose", is_flag=True, help="Makes the error messages verbose.")
 @click.option("-c", "--chat", is_flag=True, help="Start an interactive chat with the AI.")
 @click.option(
-    "-m", "--model", default="gpt-3.5-turbo", help="Model name to use for chat."
+    "-m", "--model", default="gpt-3.5-turbo-16k", help="Model name to use for chat."
 )
 @click.option(
     "-w",
