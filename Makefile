@@ -4,6 +4,8 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
+install: python-install
+
 help:
 	@echo "Please use 'make <target>' where <target> is one of the following:"
 	@echo "  chat           Start an interactive chat with the AI."
@@ -22,3 +24,10 @@ translate:
 
 image:
 	. venv/bin/activate && python main.py --image "$(prompt)"
+
+
+python-install:
+	python3 -m venv venv && \
+	. venv/bin/activate && \
+	pip install --upgrade pip && \
+	pip install -r requirements.txt
