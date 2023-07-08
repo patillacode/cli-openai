@@ -21,7 +21,6 @@ def start_chat(model, verbose=False):
     tokens = 0
     console = Console()
     while True:
-        # prompt = input("\033[1A \033[6C > ")
         prompt = input("\n􀳾 > ")
         if prompt == "exit":
             break
