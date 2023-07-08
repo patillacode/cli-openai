@@ -4,7 +4,7 @@ This is a Python 3 command line application that serves as an interface for the 
 
 ## Installation
 ```bash
-$ git clone
+$ git clone https://github.com/patillacode/cli-openai.git
 $ cd cli-openai
 $ make install
 ```
