@@ -1,0 +1,25 @@
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.py[cod]
+
+# Virtual Environments
+.env*
+.venv
+env/
+venv/
+
+# Aider
+.aider*
+
+# Django
+*.sqlite3
+*.db
+static/*
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-*
