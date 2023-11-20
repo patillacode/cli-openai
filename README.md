@@ -9,12 +9,36 @@ $ cd cli-openai
 $ make install
 ```
 
-## CLI Options
-* `--help`: Prints the help message with examples of how to use the CLI.
-* `--chat`: Starts an interactive chat with the AI.
-* `--image`: Takes in a prompt and generates an image.
-* `--whisper`: Takes in an audio file and generates a transcription.
-* `--translate`: Takes in an audio file and generates a translated transcription.
+## CLI Usage
+```bash
+Usage:  [OPTIONS]
+
+  A command-line tool for interacting with the OpenAI API. Supports chat,
+  audio transcription, audio translation, and image generation.
+
+  Args:     help (bool): Prints the help message.     verbose (bool): Makes
+  the error messages verbose.     chat (bool): Start an interactive chat with
+  the AI.     model (str): Model name to use for chat.     whisper (str):
+  Generate a transcription from an audio file.     translate (str): Generate a
+  translated transcription from an audio file.     image (str): Generate an
+  image from a prompt.     number_of_images (int): Specify the number of
+  images to generate. (default: 1)     size (str): Specify the size of the
+  images to generate (default: 1024x1024).
+
+Options:
+  -h, --help                  Prints the help message.
+  -v, --verbose               Makes the error messages verbose.
+  -c, --chat                  Start an interactive chat with the AI.
+  -m, --model TEXT            Model name to use for chat.
+  -w, --whisper PATH          Generate a transcription from an audio file.
+  -t, --translate PATH        Generate a translated transcription from an
+                              audio file.
+  -i, --image TEXT            Generate an image from a prompt.
+  --number_of_images INTEGER  Generate image(s) from a prompt. Specify the
+                              number of images to generate.
+  --size TEXT                 Specify the size of the images to generate
+                              (default: 1024x1024).
+```
 
 ## Usage Examples
 ```bash
