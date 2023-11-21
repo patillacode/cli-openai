@@ -5,22 +5,41 @@ import uuid
 import click
 import requests
 
+from icecream import ic  # noqa: F401
 
-def download_images(images):
+
+def clean_path(path):
+    """
+    Clean the given path.
+
+    Args:
+        path (str): The path to clean.
+
+    Returns:
+        str: The cleaned path.
+    """
+    if path.endswith("/"):
+        path = path[:-1]
+
+    return path
+
+
+def download_images(images, image_folder):
     """
     Download images from URLs.
 
     Args:
         images (list): List of dictionaries containing image information.
+        image_folder (str): Folder to save the downloaded images.
 
     Returns:
         list: List of downloaded image file paths.
     """
     images_files = []
     for image in images:
-        response = requests.get(image["url"], stream=True)
+        response = requests.get(image.url, stream=True)
         if response.status_code == 200:
-            file_name = f"/Users/dvitto/Downloads/{uuid.uuid4()}.png"
+            file_name = f"{clean_path(image_folder)}/{uuid.uuid4()}.png"
             with open(file_name, "wb") as f:
                 shutil.copyfileobj(response.raw, f)
             images_files.append(file_name)
@@ -38,7 +57,8 @@ def display_output(output, color="green", end="\n"):
     Args:
         output (str): The output message to display.
         color (str, optional): The color of the output message. Defaults to "green".
-        end (str, optional): The ending character for the output message. Defaults to "\n".
+        end (str, optional): The ending character for the output message.
+                             Defaults to "\n".
     """
     click.echo(click.style(output, fg=color), nl=end == "\n")
 
