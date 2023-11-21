@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from icecream import ic
+from icecream import ic  # noqa: F401
 from openai import OpenAI
 from rich.console import Console
 
@@ -28,7 +28,6 @@ def generate_image(prompt, number_of_images, image_folder, size, verbose=False):
             )
 
         with console.status("[bold blue]Downloading..."):
-            ic(image_folder)
             saved_images = download_images(images.data, image_folder)
 
         display_output("\nImages saved to Downloads folder:", "yellow")
