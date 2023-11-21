@@ -1,8 +1,12 @@
-import openai
-
+from dotenv import load_dotenv
+from icecream import ic  # noqa: F401
+from openai import OpenAI
 from rich.console import Console
 
 from utils import display_output, handle_error
+
+load_dotenv()
+client = OpenAI()
 
 
 def transcribe_audio(audio_file, verbose=False):
@@ -16,7 +20,7 @@ def transcribe_audio(audio_file, verbose=False):
     try:
         console = Console()
         with console.status("[bold green]transcribing..."):
-            transcript = openai.Audio.transcribe("whisper-1", open(audio_file, 'rb'))
+            transcript = client.audio.transcribe("whisper-1", open(audio_file, "rb"))
         display_output(
             "Below is the content of the given audio file in text form:\n", "yellow"
         )
@@ -36,7 +40,7 @@ def translate_audio(audio_file, verbose=False):
     try:
         console = Console()
         with console.status("[bold green]translating..."):
-            translation = openai.Audio.translate("whisper-1", open(audio_file, 'rb'))
+            translation = client.audio.translate("whisper-1", open(audio_file, "rb"))
         display_output(
             "Below is the translated content of the given audio file in text form:\n",
             "yellow",

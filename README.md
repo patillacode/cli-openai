@@ -42,6 +42,7 @@ Options:
 
 ## Usage Examples
 ```bash
+$ source venv/bin/activate
 $ python main.py --chat --model gpt-3.5-turbo
 # Enter your prompt and press enter
 > please generate a haiku about poker
@@ -52,18 +53,21 @@ Poker faces know.
 ```
 
 ```bash
+$ source venv/bin/activate
 $ python main.py --whisper /path/to/audio/file.mp3
 Below is the content of the given audio file in text form:
 > Hello, how are you?
 ```
 
 ```bash
+$ source venv/bin/activate
 $ python main.py --translate /path/to/audio/file.mp3
 Below is the translated content of the given audio file in text form:
 > This is a sentence in German.
 ```
 
 ```bash
+$ source venv/bin/activate
 $ python main.py --image "A blue bottle in space"
 > Here is your image: https://example.com/image.png
 ```

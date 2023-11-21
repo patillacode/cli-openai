@@ -23,3 +23,5 @@ static/*
 .vscode/
 .idea/
 *.sublime-*
+
+images/*
