@@ -1,8 +1,9 @@
-import openai
-
+from openai import OpenAI
 from rich.console import Console
 
 from utils import display_output, handle_error
+
+client = OpenAI()
 
 
 def start_chat(model, verbose=False):
@@ -28,9 +29,8 @@ def start_chat(model, verbose=False):
             message["content"] = prompt
             conversation.append(message)
             with console.status("[bold green]Generating..."):
-                completion = openai.ChatCompletion.create(
-                    model=model,
-                    messages=conversation,
+                completion = client.chat.completions.create(
+                    model=model, messages=conversation
                 )
 
             message = completion.choices[0].message

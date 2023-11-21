@@ -1,8 +1,9 @@
-import openai
-
+from openai import OpenAI
 from rich.console import Console
 
 from utils import display_output, download_images, handle_error
+
+client = OpenAI()
 
 
 def generate_image(prompt, number_of_images, size, verbose=False):
@@ -18,10 +19,8 @@ def generate_image(prompt, number_of_images, size, verbose=False):
     try:
         console = Console()
         with console.status("[bold green]Generating..."):
-            images = openai.Image.create(
-                prompt=prompt,
-                n=number_of_images,
-                size=size,
+            images = client.images.generate(
+                prompt=prompt, n=number_of_images, size=size
             )
 
         with console.status("[bold blue]Downloading..."):
