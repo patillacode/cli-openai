@@ -22,22 +22,25 @@ Usage:  [OPTIONS]
   Generate a transcription from an audio file.     translate (str): Generate a
   translated transcription from an audio file.     image (str): Generate an
   image from a prompt.     number_of_images (int): Specify the number of
-  images to generate. (default: 1)     size (str): Specify the size of the
-  images to generate (default: 1024x1024).
+  images to generate. (default: 1)     image_folder (str): Folder to save the
+  generated images.     size (str): Specify the size of the images to generate
+  (default: 1024x1024).
 
 Options:
-  -h, --help                  Prints the help message.
-  -v, --verbose               Makes the error messages verbose.
-  -c, --chat                  Start an interactive chat with the AI.
-  -m, --model TEXT            Model name to use for chat.
-  -w, --whisper PATH          Generate a transcription from an audio file.
-  -t, --translate PATH        Generate a translated transcription from an
-                              audio file.
-  -i, --image TEXT            Generate an image from a prompt.
-  --number_of_images INTEGER  Generate image(s) from a prompt. Specify the
-                              number of images to generate.
-  --size TEXT                 Specify the size of the images to generate
-                              (default: 1024x1024).
+  -h, --help                      Prints the help message.
+  -v, --verbose                   Makes the error messages verbose.
+  -c, --chat                      Start an interactive chat with the AI.
+  -m, --model TEXT                Model name to use for chat.
+  -w, --whisper PATH              Generate a transcription from an audio file.
+  -t, --translate PATH            Generate a translated transcription from an
+                                  audio file.
+  -i, --image TEXT                Generate an image from a prompt.
+  -n, --number-of-images INTEGER  Generate image(s) from a prompt. Specify the
+                                  number of images to generate.
+  -f, --image-folder TEXT         Folder to save the generated images.
+                                  (Default: ./images)
+  --size TEXT                     Specify the size of the images to generate
+                                  (default: 1024x1024).
 ```
 
 ## Usage Examples

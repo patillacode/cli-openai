@@ -41,7 +41,7 @@ load_dotenv()
     "-f",
     "--image-folder",
     default="./images",
-    help="Folder to save the generated images.",
+    help="Folder to save the generated images. (Default: ./images)",
 )
 @click.option(
     "--size",
