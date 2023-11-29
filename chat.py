@@ -3,7 +3,7 @@ from icecream import ic  # noqa: F401
 from openai import OpenAI
 from rich.console import Console
 
-from utils import display_output, handle_error, split_message
+from utils import display_output, handle_error
 
 load_dotenv()
 client = OpenAI()

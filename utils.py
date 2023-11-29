@@ -74,26 +74,3 @@ def handle_error(exception, verbose=False):
     display_output(f"Error: {str(exception)}", "red")
     if verbose:
         display_output(traceback.format_exc(), "cyan")
-
-
-def split_message(message, max_line_length=90, min_line_length=60):
-    lines = []
-    current_line = ""
-
-    words = message.split()
-
-    for word in words:
-        if len(current_line) + len(word) + 1 <= max_line_length:
-            current_line += word + " "
-        else:
-            if len(current_line) >= min_line_length:
-                lines.append(current_line.rstrip())
-                current_line = word + " "
-            else:
-                lines.append(current_line.rstrip() + word + " ")
-                current_line = ""
-
-    if current_line:
-        lines.append(current_line.rstrip())
-
-    return lines
