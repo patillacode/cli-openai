@@ -43,7 +43,7 @@ def start_chat(model, verbose=False):
                 completion = client.chat.completions.create(
                     model=model,
                     messages=conversation,
-                    stream=True,
+                    # stream=True,
                 )
             # for chunk in completion:
             #     if chunk.choices[0].delta.content is not None:
@@ -51,7 +51,7 @@ def start_chat(model, verbose=False):
             message = completion.choices[0].message
             conversation.append({"role": "system", "content": message.content})
             tokens = completion.usage.total_tokens
-            ic(conversation)
+            # ic(conversation)
             display_output(f"\n􀪬  > {message.content}")
             display_output(f"\n􀤚  ({tokens})", color="magenta")
 
