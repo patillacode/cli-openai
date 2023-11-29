@@ -37,7 +37,7 @@ def start_chat(model, verbose=False):
                 )
 
             message = completion.choices[0].message
-            conversation.append(message.to_dict())
+            conversation.append(message.content)
             tokens = completion.usage.total_tokens
             display_output(f"\n􀪬  > {message.content}")
             display_output(f"\n􀤚  ({tokens})", color="magenta")
