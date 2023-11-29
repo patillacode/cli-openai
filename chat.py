@@ -35,8 +35,12 @@ def start_chat(model, verbose=False):
 
     while True:
         prompt = input("\n􀳾 > ")
-        if prompt == "exit":
+
+        if prompt == "":
+            continue
+        elif prompt == "exit":
             break
+
         try:
             conversation.append({"role": "user", "content": prompt})
             with console.status("[bold green]Generating..."):
@@ -51,14 +55,12 @@ def start_chat(model, verbose=False):
             message = completion.choices[0].message
             conversation.append({"role": "system", "content": message.content})
             tokens = completion.usage.total_tokens
-            # ic(conversation)
-            # split string into lines of 50 chars
+
             display_output("\n􀪬  > ", end="")
-
             lines = split_message(message.content)
-
             for line in lines:
                 display_output(f"{line}", color="yellow")
+
             display_output(f"\n\n􀪬  ({tokens})", color="magenta")
 
         except Exception as e:
