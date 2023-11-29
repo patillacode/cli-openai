@@ -3,7 +3,7 @@ from icecream import ic  # noqa: F401
 from openai import OpenAI
 from rich.console import Console
 
-from utils import display_output, handle_error
+from utils import display_output, handle_error, split_message
 
 load_dotenv()
 client = OpenAI()
@@ -52,8 +52,14 @@ def start_chat(model, verbose=False):
             conversation.append({"role": "system", "content": message.content})
             tokens = completion.usage.total_tokens
             # ic(conversation)
-            display_output(f"\n􀪬  > {message.content}")
-            display_output(f"\n􀤚  ({tokens})", color="magenta")
+            # split string into lines of 50 chars
+            display_output("\n􀪬  > ", end="")
+
+            lines = split_message(message.content)
+
+            for line in lines:
+                display_output(f"{line}", color="yellow")
+            display_output(f"\n\n􀪬  ({tokens})", color="magenta")
 
         except Exception as e:
             handle_error(e, verbose)
