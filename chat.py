@@ -20,23 +20,18 @@ def start_chat(model, verbose=False):
     display_output("Starting chat...")
 
     system = {"role": "system", "content": f"DIRECTIVE_FOR_{model}"}
-    # message = {"role": "user", "content": ""}
     conversation = [system]
-    tokens = 0
     console = Console()
 
     completion = client.chat.completions.create(
         model=model,
         messages=conversation,
-        # stream=True,
     )
-    # for chunk in completion:
-    #     print(chunk.choices[0].delta)
 
     while True:
         prompt = input("\n􀳾 > ")
 
-        if prompt == "":
+        if prompt.strip() == "":
             continue
         elif prompt == "exit":
             break
@@ -47,21 +42,17 @@ def start_chat(model, verbose=False):
                 completion = client.chat.completions.create(
                     model=model,
                     messages=conversation,
-                    # stream=True,
+                    stream=True,
                 )
-            # for chunk in completion:
-            #     if chunk.choices[0].delta.content is not None:
-            #         print(chunk.choices[0].delta.content, end="")
-            message = completion.choices[0].message
-            conversation.append({"role": "system", "content": message.content})
-            tokens = completion.usage.total_tokens
+            messages = []
+            for chunk in completion:
+                if chunk.choices[0].delta.content is not None:
+                    content = chunk.choices[0].delta.content
+                    messages.append(content)
+                    display_output(content, color="yellow", end="")
 
-            display_output("\n􀪬  > ", end="")
-            lines = split_message(message.content)
-            for line in lines:
-                display_output(f"{line}", color="yellow")
-
-            display_output(f"\n\n􀪬  ({tokens})", color="magenta")
+            full_message = "".join(messages)
+            conversation.append({"role": "system", "content": full_message})
 
         except Exception as e:
             handle_error(e, verbose)
