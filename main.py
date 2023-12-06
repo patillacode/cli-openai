@@ -13,12 +13,6 @@ load_dotenv()
 
 @click.command()
 @click.option(
-    "-h",
-    "--help",
-    is_flag=True,
-    help="Prints the help message.",
-)
-@click.option(
     "-v",
     "--verbose",
     is_flag=True,
@@ -46,7 +40,10 @@ load_dotenv()
     "-t",
     "--translate",
     type=click.Path(exists=True),
-    help="Generate a translated transcription from an audio file.",
+    help=(
+        "Generate a translated transcription from an audio file. "
+        "Translates audio into English."
+    ),
 )
 @click.option(
     "-i",
@@ -59,7 +56,10 @@ load_dotenv()
     "--number-of-images",
     default=1,
     type=int,
-    help="Generate image(s) from a prompt. Specify the number of images to generate.",
+    help=(
+        "Generate image(s) from a prompt. Specify the number of images to generate. "
+        "(Default: 1)"
+    ),
 )
 @click.option(
     "-f",
@@ -74,12 +74,12 @@ load_dotenv()
     help="Model name to use for image generation. (Default: dall-e-3)",
 )
 @click.option(
-    "--size",
+    "-s",
+    "--image-size",
     default="1024x1024",
     help="Specify the size of the images to generate (default: 1024x1024).",
 )
 def main(
-    help,
     verbose,
     chat,
     model,
@@ -89,24 +89,11 @@ def main(
     number_of_images,
     image_folder,
     image_model,
-    size,
+    image_size,
 ):
     """
     A command-line tool for interacting with the OpenAI API.
     Supports chat, audio transcription, audio translation, and image generation.
-
-    Args:
-        help (bool): Prints the help message.
-        verbose (bool): Makes the error messages verbose.
-        chat (bool): Start an interactive chat with the AI.
-        model (str): Model name to use for chat.
-        whisper (str): Generate a transcription from an audio file.
-        translate (str): Generate a translated transcription from an audio file.
-        image (str): Generate an image from a prompt.
-        number_of_images (int): Specify the number of images to generate. (default: 1)
-        image_folder (str): Folder to save the generated images.
-        image_model (str): Model name to use for image generation.
-        size (str): Specify the size of the images to generate (default: 1024x1024).
     """
 
     validate_options(click.get_current_context())
@@ -119,7 +106,7 @@ def main(
         translate_audio(translate, verbose)
     elif image:
         generate_image(
-            image_model, image, number_of_images, image_folder, size, verbose
+            image_model, image, number_of_images, image_folder, image_size, verbose
         )
     else:
         click.echo(main.get_help(click.Context(main)))

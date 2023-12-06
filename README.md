@@ -11,39 +11,28 @@ $ make install
 
 ## CLI Usage
 ```bash
-Usage:  [OPTIONS]
+Usage: main.py [OPTIONS]
 
   A command-line tool for interacting with the OpenAI API. Supports chat,
   audio transcription, audio translation, and image generation.
 
-  Args:     help (bool): Prints the help message.     verbose (bool): Makes
-  the error messages verbose.     chat (bool): Start an interactive chat with
-  the AI.     model (str): Model name to use for chat.     whisper (str):
-  Generate a transcription from an audio file.     translate (str): Generate a
-  translated transcription from an audio file.     image (str): Generate an
-  image from a prompt.     number_of_images (int): Specify the number of
-  images to generate. (default: 1)     image_folder (str): Folder to save the
-  generated images.     image_model (str): Model name to use for image
-  generation.     size (str): Specify the size of the images to generate
-  (default: 1024x1024).
-
 Options:
-  -h, --help                      Prints the help message.
   -v, --verbose                   Makes the error messages verbose.
   -c, --chat                      Start an interactive chat with the AI.
   -m, --model TEXT                Model name to use for chat.
   -w, --whisper PATH              Generate a transcription from an audio file.
   -t, --translate PATH            Generate a translated transcription from an
-                                  audio file.
+                                  audio file. Translates audio into English.
   -i, --image TEXT                Generate an image from a prompt.
   -n, --number-of-images INTEGER  Generate image(s) from a prompt. Specify the
-                                  number of images to generate.
+                                  number of images to generate. (Default: 1)
   -f, --image-folder TEXT         Folder to save the generated images.
                                   (Default: ./images)
   -g, --image-model TEXT          Model name to use for image generation.
                                   (Default: dall-e-3)
-  --size TEXT                     Specify the size of the images to generate
+  -s, --image-size TEXT           Specify the size of the images to generate
                                   (default: 1024x1024).
+  --help                          Show this message and exit.
 ```
 
 ## Usage Examples
