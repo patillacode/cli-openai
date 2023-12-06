@@ -4,6 +4,7 @@ __pycache__/
 dist/
 build/
 *.py[cod]
+.DS_Store
 
 # Virtual Environments
 .env
