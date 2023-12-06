@@ -23,7 +23,8 @@ Usage:  [OPTIONS]
   translated transcription from an audio file.     image (str): Generate an
   image from a prompt.     number_of_images (int): Specify the number of
   images to generate. (default: 1)     image_folder (str): Folder to save the
-  generated images.     size (str): Specify the size of the images to generate
+  generated images.     image_model (str): Model name to use for image
+  generation.     size (str): Specify the size of the images to generate
   (default: 1024x1024).
 
 Options:
@@ -39,6 +40,8 @@ Options:
                                   number of images to generate.
   -f, --image-folder TEXT         Folder to save the generated images.
                                   (Default: ./images)
+  -g, --image-model TEXT          Model name to use for image generation.
+                                  (Default: dall-e-3)
   --size TEXT                     Specify the size of the images to generate
                                   (default: 1024x1024).
 ```
