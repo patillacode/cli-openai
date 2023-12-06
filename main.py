@@ -6,17 +6,36 @@ from icecream import ic  # noqa: F401
 from audio import transcribe_audio, translate_audio
 from chat import start_chat
 from image import generate_image
+from utils import validate_options
 
 load_dotenv()
 
 
 @click.command()
-@click.option("-h", "--help", is_flag=True, help="Prints the help message.")
-@click.option("-v", "--verbose", is_flag=True, help="Makes the error messages verbose.")
 @click.option(
-    "-c", "--chat", is_flag=True, help="Start an interactive chat with the AI."
+    "-h",
+    "--help",
+    is_flag=True,
+    help="Prints the help message.",
 )
-@click.option("-m", "--model", default="gpt-4", help="Model name to use for chat.")
+@click.option(
+    "-v",
+    "--verbose",
+    is_flag=True,
+    help="Makes the error messages verbose.",
+)
+@click.option(
+    "-c",
+    "--chat",
+    is_flag=True,
+    help="Start an interactive chat with the AI.",
+)
+@click.option(
+    "-m",
+    "--model",
+    default="gpt-4",
+    help="Model name to use for chat.",
+)
 @click.option(
     "-w",
     "--whisper",
@@ -29,7 +48,12 @@ load_dotenv()
     type=click.Path(exists=True),
     help="Generate a translated transcription from an audio file.",
 )
-@click.option("-i", "--image", help="Generate an image from a prompt.")
+@click.option(
+    "-i",
+    "--image",
+    type=str,
+    help="Generate an image from a prompt.",
+)
 @click.option(
     "-n",
     "--number-of-images",
@@ -42,6 +66,12 @@ load_dotenv()
     "--image-folder",
     default="./images",
     help="Folder to save the generated images. (Default: ./images)",
+)
+@click.option(
+    "-g",
+    "--image-model",
+    default="dall-e-3",
+    help="Model name to use for image generation. (Default: dall-e-3)",
 )
 @click.option(
     "--size",
@@ -58,6 +88,7 @@ def main(
     image,
     number_of_images,
     image_folder,
+    image_model,
     size,
 ):
     """
@@ -74,8 +105,12 @@ def main(
         image (str): Generate an image from a prompt.
         number_of_images (int): Specify the number of images to generate. (default: 1)
         image_folder (str): Folder to save the generated images.
+        image_model (str): Model name to use for image generation.
         size (str): Specify the size of the images to generate (default: 1024x1024).
     """
+
+    validate_options(click.get_current_context())
+
     if chat:
         start_chat(model, verbose)
     elif whisper:
@@ -83,7 +118,9 @@ def main(
     elif translate:
         translate_audio(translate, verbose)
     elif image:
-        generate_image(image, number_of_images, image_folder, size, verbose)
+        generate_image(
+            image_model, image, number_of_images, image_folder, size, verbose
+        )
     else:
         click.echo(main.get_help(click.Context(main)))
 

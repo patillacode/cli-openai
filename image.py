@@ -9,7 +9,7 @@ load_dotenv()
 client = OpenAI()
 
 
-def generate_image(prompt, number_of_images, image_folder, size, verbose=False):
+def generate_image(model, prompt, number_of_images, image_folder, size, verbose=False):
     """
     Generate image(s) from a prompt.
 
@@ -24,13 +24,16 @@ def generate_image(prompt, number_of_images, image_folder, size, verbose=False):
         console = Console()
         with console.status("[bold green]Generating..."):
             images = client.images.generate(
-                prompt=prompt, n=number_of_images, size=size
+                model=model,
+                prompt=prompt,
+                n=number_of_images,
+                size=size,
             )
 
         with console.status("[bold blue]Downloading..."):
             saved_images = download_images(images.data, image_folder)
 
-        display_output("\nImages saved to Downloads folder:", "yellow")
+        display_output("\nImages saved:", "yellow")
         for image in saved_images:
             display_output(f"- {image}", "cyan")
 
