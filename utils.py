@@ -1,3 +1,4 @@
+import os
 import shutil
 import traceback
 import uuid
@@ -6,6 +7,34 @@ import click
 import requests
 
 from icecream import ic  # noqa: F401
+
+
+def validate_options(ctx):
+    """
+    Validate the given options.
+
+    Args:
+        ctx (click.Context): The click context object.
+
+    Raises:
+        click.UsageError: If more than one service is used at the same time.
+    """
+    options = [
+        bool(option)
+        for option in [
+            ctx.params.get("chat", None),
+            ctx.params.get("whisper", None),
+            ctx.params.get("translate", None),
+            ctx.params.get("image", None),
+        ]
+    ]
+    if sum(options) > 1:
+        raise click.UsageError(
+            "You can't use more than one service at the same time.\n"
+            "Please choose one of the following: "
+            "-c (chat), -w (whisper), -t (translate) or -i (image).\n"
+            "For more information, run with the --help option.\n"
+        )
 
 
 def clean_path(path):
@@ -43,6 +72,7 @@ def download_images(images, image_folder):
             with open(file_name, "wb") as f:
                 shutil.copyfileobj(response.raw, f)
             images_files.append(file_name)
+
         else:
             display_output("Error downloading: ", color="red", end="")
             display_output(image["url"], color="cyan", end="")
