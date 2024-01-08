@@ -11,6 +11,8 @@ build/
 .venv
 env/
 venv/
+.autoenv.sh
+.autoenv_leave.sh
 
 # Aider
 .aider*
